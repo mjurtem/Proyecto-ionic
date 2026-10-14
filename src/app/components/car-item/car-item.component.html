@@ -1,11 +1,6 @@
 <ion-card>
   <ion-item>
-    <ion-checkbox
-      slot="start"
-      >
-    </ion-checkbox>
-
-    <ion-label [color]="coche.disponible ? 'success' : 'danger'">
+    <ion-label [color]="coche.disponible ? 'success' : 'warning'">
       {{ coche.marca }} {{ coche.modelo }} ({{ coche.anno }}) - {{ coche.precio | currency:'EUR' }}
     </ion-label>
 

@@ -9,4 +9,5 @@ export interface Coches
     seguro: boolean;
     disponible: boolean;
     precio: number;
+    imagen: string;
 }

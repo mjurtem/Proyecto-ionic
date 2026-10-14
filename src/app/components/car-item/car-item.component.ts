@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./car-item.component.scss'],
   standalone: true,
   // 3. Registramos los módulos y componentes en el array 'imports'
-  imports: [CommonModule, IonCard, IonItem, IonCheckbox, IonLabel, IonButton]
+  imports: [CommonModule, IonCard, IonItem, IonLabel, IonButton]
 })
 export class CarItemComponent 
 {
