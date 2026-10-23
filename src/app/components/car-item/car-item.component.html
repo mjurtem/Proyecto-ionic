@@ -1,5 +1,7 @@
 <ion-card>
+  <img loading="lazy" src="{{coche.imagen}}" alt="imagen">
   <ion-item>
+    
     <ion-label [color]="coche.disponible ? 'success' : 'warning'">
       {{ coche.marca }} {{ coche.modelo }} ({{ coche.anno }}) - {{ coche.precio | currency:'EUR' }}
     </ion-label>

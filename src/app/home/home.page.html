@@ -13,19 +13,25 @@
     </ion-toolbar>
   </ion-header>
 
-   <!-- Directiva *ngIf: este div solo existirá en el DOM si la condición es verdadera -->
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let coche of catalogo" size="6" size-md="4">
+        <!-- 
+          Directiva *ngFor: este es el bucle. 
+          - Por cada objeto 'tarea' que haya en el array 'listaDeTareas'...
+          - ...Angular creará una instancia de nuestro componente <app-task-item>.
+        -->
+        <app-car-item
+          [coche]="coche">
+          <!-- Property Binding: le pasamos el objeto 'coche' actual al @Input del componente hijo -->
+        </app-car-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Directiva *ngIf: este div solo existirá en el DOM si la condición es verdadera -->
   <div *ngIf="catalogo.length === 0" class="mensaje-vacio">
     <p>¡Enhorabuena!</p>
     <p>No tienes coches en el catálogo.</p>
   </div>
-
-  <!-- 
-    Directiva *ngFor: este es el bucle. 
-    - Por cada objeto 'tarea' que haya en el array 'listaDeTareas'...
-    - ...Angular creará una instancia de nuestro componente <app-task-item>.
-  -->
-  <app-car-item
-    *ngFor="let coche of catalogo"
-    [coche]="coche"> <!-- Property Binding: le pasamos el objeto 'coche' actual al @Input del componente hijo -->
-  </app-car-item>
 </ion-content>
