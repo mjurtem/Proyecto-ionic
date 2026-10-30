@@ -1,2 +1,23 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+/* 1. Definimos un bloque de estilos reutilizable mediante un mixin */
+@mixin dark-theme-variables {
+  --ion-color-primary: #428cff;
+  --ion-color-primary-rgb: 66,140,255;
+  --ion-color-primary-contrast: #ffffff;
+  
+  --ion-background-color: #121212;
+  --ion-text-color: #ffffff;
+}
+
+/* 2. Aplicamos el mixin cuando el sistema operativo detecta preferencia oscura */
+@media (prefers-color-scheme: dark) {
+  body {
+    @include dark-theme-variables;
+  }
+}
+
+/* 3. Aplicamos el mixin cuando el servicio añade la clase .dark al body */
+body.dark {
+  @include dark-theme-variables;
+}
