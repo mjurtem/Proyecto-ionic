@@ -1,5 +1,15 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+:root {
+  --ion-color-primary: #f48c06;
+  --ion-color-primary-rgb: 244, 140, 6;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #d77b05;
+  --ion-color-primary-tint: #f5981f;
+}
+
 /* 1. Definimos un bloque de estilos reutilizable mediante un mixin */
 @mixin dark-theme-variables {
   --ion-color-primary: #428cff;
