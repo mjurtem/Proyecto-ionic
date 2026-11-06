@@ -12,6 +12,8 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- <app-app-header></app-app-header> -->
+
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -24,8 +26,8 @@
       <ion-col *ngFor="let coche of catalogo" size="6" size-md="4">
         <!-- 
           Directiva *ngFor: este es el bucle. 
-          - Por cada objeto 'tarea' que haya en el array 'listaDeTareas'...
-          - ...Angular creará una instancia de nuestro componente <app-task-item>.
+          - Por cada objeto 'coche' que haya en el array 'catalogo'...
+          - ...Angular creará una instancia de nuestro componente <app-car-item>.
         -->
         <app-car-item
           [coche]="coche">
