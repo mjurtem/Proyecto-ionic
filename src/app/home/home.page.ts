@@ -4,6 +4,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonInput
 import { RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { settingsOutline } from 'ionicons/icons';
+import { FormsModule } from '@angular/forms';
 
 
 // Imports de nuestra aplicación
@@ -25,7 +26,8 @@ import { AppHeaderComponent } from '../components/app-header/app-header.componen
     CarItemComponent, // Nuestro componente hijo
     CommonModule, // El módulo para las directivas
     AppHeaderComponent,
-    IonGrid, IonRow, IonCol, RouterLink, IonButtons, IonIcon
+    IonGrid, IonRow, IonCol, RouterLink, IonButtons, IonIcon,
+    FormsModule, IonList, IonItem, IonButton
   ]
 })
 export class HomePage 
@@ -39,8 +41,44 @@ export class HomePage
     { id: 5, marca: 'Audi', modelo: 'A4', anno: 2017, km: 60000, itv: false, seguro: false, disponible: true, precio: 25000, imagen: "https://picsum.photos/400/300?random=5" }
   ];
 
+  public nuevoCoche: Coches =
+  {
+    id: 0, 
+    marca: '', 
+    modelo: '', 
+    anno: 0, 
+    km: 0, 
+    itv: false, 
+    seguro: false, 
+    disponible: false, 
+    precio: 0, 
+    imagen: "" 
+  };
+
   constructor() 
   {
     addIcons({ settingsOutline });
   }
+
+  agregarCoche()
+  {
+    if (this.nuevoCoche.marca.trim().length === 0 && this.nuevoCoche.modelo.trim().length === 0 
+    && this.nuevoCoche.anno <= 0 && this.nuevoCoche.km < 0 && this.nuevoCoche.precio <= 0 && this.nuevoCoche.imagen.trim().length === 0)
+    {
+      return;
+    }
+
+    let ultimoCoche = this.catalogo.at(-1);
+    let id = Number(ultimoCoche?.id) + 1;
+    const cocheParaAñadir: Coches =
+    {
+      ...this.nuevoCoche,
+      id: id,
+      imagen: "https://picsum.photos/400/300?random=" + id.toString()
+    };
+
+    this.catalogo.unshift(cocheParaAñadir);
+
+    this.nuevoCoche = { id: 0, marca: '', modelo: '', anno: 0, km: 0, itv: false, seguro: false, disponible: false, precio: 0, imagen: ""};
+  } 
 }

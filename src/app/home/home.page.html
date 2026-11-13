@@ -21,6 +21,28 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-- Contenido para añadir en: src/app/home/home.page.html (dentro de ion-content) -->
+
+<!-- FORMULARIO PARA AÑADIR TAREAS -->
+<ion-list>
+  <ion-item>
+    <ion-input
+      label="Nueva Coche"
+      label-placement="floating"
+      placeholder="¿Qué necesitas hacer?"
+      [(ngModel)]="nuevoCoche.marca"
+      [(ngModel)]="nuevoCoche.modelo"
+      [(ngModel)]="nuevoCoche.anno"
+      [(ngModel)]="nuevoCoche.marca"
+      > <!-- Enlazado a la propiedad 'marca' del objeto -->
+    </ion-input>
+  </ion-item>
+</ion-list>
+
+<ion-button expand="block" (click)="agregarCoche()" class="ion-margin-top ion-margin-bottom">
+  Añadir Tarea
+</ion-button>
+
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let coche of catalogo" size="6" size-md="4">
