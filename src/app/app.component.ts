@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { trash, create } from 'ionicons/icons';
+import { SettingsService } from './services/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,9 @@ import { trash, create } from 'ionicons/icons';
 })
 export class AppComponent 
 {
-  constructor() 
+  constructor(private settingsService: SettingsService) 
   {
+    this.settingsService.init();
     addIcons({ trash, create });
   }
 }

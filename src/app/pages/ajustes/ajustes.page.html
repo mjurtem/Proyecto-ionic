@@ -22,7 +22,7 @@
     <ion-item>
       <ion-label>Modo Oscuro</ion-label>
       <!-- Enlazamos la propiedad checked con el servicio y capturamos el evento ionChange -->
-      <ion-toggle [checked]="settingsService.isDarkMode()" (ionChange)="onToggleChange($event)"></ion-toggle>
+      <ion-toggle [checked]="settingsService.isDarkMode" (ionChange)="onToggleChange($event)"></ion-toggle>
     </ion-item>
   </ion-list>
 </ion-content>

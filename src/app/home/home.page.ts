@@ -1,6 +1,6 @@
 // Imports básicos de Angular y Ionic
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonInput, IonButton, IonButtons, IonIcon, IonGrid, IonRow, IonCol } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonInput, IonToggle, IonButton, IonButtons, IonIcon, IonGrid, IonRow, IonCol } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { settingsOutline } from 'ionicons/icons';
@@ -27,7 +27,7 @@ import { AppHeaderComponent } from '../components/app-header/app-header.componen
     CommonModule, // El módulo para las directivas
     AppHeaderComponent,
     IonGrid, IonRow, IonCol, RouterLink, IonButtons, IonIcon,
-    FormsModule, IonList, IonItem, IonButton
+    FormsModule, IonList, IonItem, IonButton, IonInput,IonToggle
   ]
 })
 export class HomePage 
@@ -60,25 +60,26 @@ export class HomePage
     addIcons({ settingsOutline });
   }
 
-  agregarCoche()
-  {
-    if (this.nuevoCoche.marca.trim().length === 0 && this.nuevoCoche.modelo.trim().length === 0 
-    && this.nuevoCoche.anno <= 0 && this.nuevoCoche.km < 0 && this.nuevoCoche.precio <= 0 && this.nuevoCoche.imagen.trim().length === 0)
-    {
-      return;
-    }
+  agregarCoche() {
+  const c = this.nuevoCoche;
+  if (c.marca.trim().length === 0 || c.modelo.trim().length === 0 ||
+      Number(c.anno) <= 0 || Number(c.km) < 0 || Number(c.precio) <= 0) {
+    return;
+  }
 
-    let ultimoCoche = this.catalogo.at(-1);
-    let id = Number(ultimoCoche?.id) + 1;
-    const cocheParaAñadir: Coches =
-    {
-      ...this.nuevoCoche,
-      id: id,
-      imagen: "https://picsum.photos/400/300?random=" + id.toString()
-    };
+  const id = this.catalogo.length > 0
+    ? Math.max(...this.catalogo.map(x => x.id)) + 1
+    : 1;
 
-    this.catalogo.unshift(cocheParaAñadir);
+  this.catalogo.unshift({
+    ...c,
+    anno: Number(c.anno),
+    km: Number(c.km),
+    precio: Number(c.precio),
+    id,
+    imagen: 'https://picsum.photos/400/300?random=' + id
+  });
 
-    this.nuevoCoche = { id: 0, marca: '', modelo: '', anno: 0, km: 0, itv: false, seguro: false, disponible: false, precio: 0, imagen: ""};
-  } 
+  this.nuevoCoche = { id: 0, marca: '', modelo: '', anno: 0, km: 0, itv: false, seguro: false, disponible: false, precio: 0, imagen: '' };
+}
 }

@@ -4,25 +4,32 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SettingsService {
-  // Estado privado para proteger la variable y controlar su acceso
-  private darkMode: boolean = false;
-
   constructor() { }
+  private readonly KEY = 'darkMode';
+  isDarkMode = false;
 
-  // Método getter: Devuelve si el modo oscuro está activo actualmente
-  isDarkMode(): boolean {
-    return this.darkMode;
+  // Llamar una vez al arrancar la app
+  init() {
+    const guardado = localStorage.getItem(this.KEY);
+    const sistema = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Si el usuario ya eligió, se respeta; si no, se usa el modo del navegador
+    this.aplicar(guardado !== null ? guardado === 'true' : sistema.matches);
+
+    // Si el navegador cambia de modo y el usuario no ha elegido nada, se sigue al sistema
+    sistema.addEventListener('change', e => {
+      if (localStorage.getItem(this.KEY) === null) this.aplicar(e.matches);
+    });
   }
 
-  // Activa o desactiva el modo oscuro y actualiza el DOM de forma inmediata
-  setDarkMode(enable: boolean) {
-    this.darkMode = enable;
-    // Añade o quita la clase 'dark' del elemento body de la página web/app
-    document.body.classList.toggle('dark', this.darkMode);
+  // El método que ya llama tu página
+  setDarkMode(oscuro: boolean) {
+    this.aplicar(oscuro);
+    localStorage.setItem(this.KEY, String(oscuro));
   }
 
-  // Método para alternar (toggle) el estado actual de forma rápida
-  toggleDarkMode() {
-    this.setDarkMode(!this.darkMode);
+  private aplicar(oscuro: boolean) {
+    this.isDarkMode = oscuro;
+    document.documentElement.classList.toggle('ion-palette-dark', oscuro);
   }
 }
